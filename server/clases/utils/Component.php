@@ -1,7 +1,11 @@
 <?php
 
 namespace clases\utils;
+
+use PDO;
 use clases\db\Connection;
+use clases\db\ConnectionFactory;
+
 /**
  * Description of Component
  *
@@ -13,18 +17,22 @@ class Component {
 
     function __construct(Connection $connection = null) {
         if ($connection === null) {
-            $connection = new Connection();
+            $connection = ConnectionFactory::buildConnection();
         }
 
         $this->connection = $connection;
     }
 
-    function getConnection(): Connection {
+    public function getConnection(): Connection {
         return $this->connection;
     }
 
-    function setConnection(Connection $connection) {
+    public function setConnection(Connection $connection) {
         $this->connection = $connection;
+    }
+
+    public function getPdo(): PDO {
+        return $this->connection->getConnection();
     }
 
 }

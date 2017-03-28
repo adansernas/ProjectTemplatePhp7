@@ -15,7 +15,7 @@ class UsuariosController extends Controller {
 
     public function listarUsuarios() {
         try {
-            $this->getConnection()->conectar();
+            $this->getConnection()->connect();
             $service = new UsuarioService($this->getConnection());
             $service->listarUsuarios();
         } catch (Exception $ex) {

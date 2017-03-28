@@ -9,7 +9,15 @@ spl_autoload_register(function ($nameClass) {
     require $pathfile;
 });
 
-use controller\UsuariosController;
+use controller\AutenticacionController;
+use clases\http\HttpRequest;
+use clases\http\HttpResponse;
 
-$controller = new UsuariosController();
-$controller->listarUsuarios();
+$httpRequest = new HttpRequest(array('cuenta' => 'ADMINISTRADOR', 'password' => 'ADMINISTRADOR'));
+$httpResponse = new HttpResponse();
+$httpResponse->doProcess('procesando');
+
+$controller = new AutenticacionController();
+$validacion = $controller->autenticarUsuario($httpRequest, $httpResponse);
+echo '<pre>';
+print_r($validacion->out());

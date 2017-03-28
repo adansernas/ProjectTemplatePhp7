@@ -3,6 +3,7 @@
 namespace clases\utils;
 
 use clases\db\Connection;
+use clases\db\ConnectionFactory;
 
 /**
  * Description of Service
@@ -13,7 +14,7 @@ class Service extends Component {
 
     function __construct(Connection $connection = null) {
         if ($connection === null) {
-            $connection = new Connection();
+            $connection = ConnectionFactory::buildConnection();
         }
 
         parent::__construct($connection);
